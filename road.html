@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ташкент — 1–3 мая</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #191919;
+    color: #e2e2e2;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Cover */
+  .cover {
+    background: linear-gradient(135deg, #1f3a2f 0%, #0f2a40 60%, #1a1a2e 100%);
+    border-radius: 12px;
+    padding: 48px 40px 36px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(71,186,131,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover-emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .cover-sub {
+    color: #7fbfa0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .tag {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 500;
+  }
+  .tag.green { background: rgba(71,186,131,0.15); border-color: rgba(71,186,131,0.3); color: #47ba83; }
+
+  /* Properties block */
+  .properties {
+    background: #232323;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .prop-item label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .prop-item span {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .prop-item span.accent { color: #47ba83; }
+
+  /* Section heading */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0 20px;
+  }
+  .section-heading h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .day-badge {
+    background: #47ba83;
+    color: #0d1f17;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .day-badge.blue { background: #4b9ef5; color: #0d1a2e; }
+  .day-badge.amber { background: #f5a623; color: #1e1200; }
+
+  .day-subtitle {
+    font-size: 12px;
+    color: #666;
+    margin-top: -12px;
+    margin-bottom: 16px;
+    padding-left: 4px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid #2a2a2a;
+    margin-bottom: 8px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3a3a3a;
+    border: 2px solid #555;
+  }
+  .timeline-item.priority::before {
+    background: #47ba83;
+    border-color: #47ba83;
+    box-shadow: 0 0 0 3px rgba(71,186,131,0.2);
+  }
+  .timeline-item.medium::before {
+    background: #f5a623;
+    border-color: #f5a623;
+  }
+
+  .tl-card {
+    background: #232323;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+  }
+  .tl-card:hover { border-color: #3a3a3a; }
+  .timeline-item.priority .tl-card { border-left: 3px solid #47ba83; }
+  .timeline-item.medium .tl-card { border-left: 3px solid #f5a623; }
+  .timeline-item.low .tl-card { border-left: 3px solid #444; }
+
+  .tl-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .tl-time {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    white-space: nowrap;
+    margin-top: 2px;
+    min-width: 48px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tl-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e8e8e8;
+    flex: 1;
+  }
+  .tl-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-must { background: rgba(71,186,131,0.15); color: #47ba83; border: 1px solid rgba(71,186,131,0.3); }
+  .badge-fly { background: rgba(255,255,255,0.05); color: #666; border: 1px solid #333; }
+  .badge-food { background: rgba(245,166,35,0.15); color: #f5a623; border: 1px solid rgba(245,166,35,0.3); }
+
+  .tl-note {
+    font-size: 12.5px;
+    color: #888;
+    line-height: 1.5;
+    padding-left: 58px;
+    margin-top: 2px;
+  }
+  .tl-note strong { color: #aaa; font-weight: 600; }
+
+  .tl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-left: 58px;
+    margin-top: 8px;
+  }
+  .chip {
+    background: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: #777;
+  }
+
+  /* Divider */
+  hr {
+    border: none;
+    border-top: 1px solid #272727;
+    margin: 32px 0;
+  }
+
+  /* Callout */
+  .callout {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #1e2a22;
+    border: 1px solid #2a3d30;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #9ecfb3;
+    line-height: 1.55;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout.amber {
+    background: #241f12;
+    border-color: #3d3015;
+    color: #c9a04d;
+  }
+  .callout.blue {
+    background: #121a24;
+    border-color: #1a2d40;
+    color: #7ab0e0;
+  }
+
+  /* Tips grid */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .tip-card {
+    background: #232323;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 13px 14px;
+    font-size: 12.5px;
+    color: #999;
+    line-height: 1.5;
+  }
+  .tip-card .tip-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .tip-card .tip-value { color: #ccc; font-weight: 500; }
+
+  /* Transport */
+  .transport-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #888;
+    padding: 4px 0;
+  }
+  .transport-row span.icon { font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <span class="cover-emoji">🕌</span>
+    <h1>Ташкент — 3 дня</h1>
+    <div class="cover-sub">Маршрут · 1–3 мая 2025</div>
+    <div class="cover-tags">
+      <span class="tag green">📍 Узбекистан</span>
+      <span class="tag">🚌 Алматы → автобус</span>
+      <span class="tag">🚂 Ташкент → поезд</span>
+      <span class="tag">3 ночи</span>
+      <span class="tag">~20–30$</span>
+    </div>
+  </div>
+
+  <!-- PROPERTIES -->
+  <div class="properties">
+    <div class="prop-item">
+      <label>📅 Даты</label>
+      <span>1 мая (пт) — 3 мая (вс)</span>
+    </div>
+    <div class="prop-item">
+      <label>🚌 Приезд</label>
+      <span>30 апреля ночью / утро 1 мая</span>
+    </div>
+    <div class="prop-item">
+      <label>🚂 Отъезд</label>
+      <span accent class="accent">Поезд — вечер 3 мая</span>
+    </div>
+    <div class="prop-item">
+      <label>🚕 Транспорт</label>
+      <span>Yandex Go · весь день ~15–25$</span>
+    </div>
+    <div class="prop-item">
+      <label>💰 Валюта</label>
+      <span>Узбекский сум · карты OK</span>
+    </div>
+    <div class="prop-item">
+      <label>🌡️ Погода</label>
+      <span>~25–28°C, солнечно</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <div>
+      <strong>Как читать маршрут:</strong> <span style="color:#7fbfa0">🔴 ЗАДЕРЖИСЬ</span> — главные точки, минимум 1–1.5 ч. <span style="color:#999">⏩ МИМОЛЁТНО</span> — проходные локации, 20–30 мин. Если устанешь — сначала убирай «мимолётные».
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- DAY 1 -->
+  <div class="section-heading">
+    <span class="day-badge">День 1</span>
+    <h2>Пятница, 1 мая — История + центр</h2>
+  </div>
+  <p class="day-subtitle">Праздничный день → оживлённо. Исторический Ташкент + вечернее световое шоу у фонтанов (только пт и вс!)</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item low">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">09:00</span>
+          <span class="tl-title">🕌 Мавзолей Шайхантахура</span>
+          <span class="tl-badge badge-fly">⏩ Мимолётно</span>
+        </div>
+        <p class="tl-note">20–30 мин. Небольшой исторический комплекс с тремя мавзолеями, тихое начало дня. Хорошая разминка перед Хазрати Имам.</p>
+        <div class="tl-chips">
+          <span class="chip">~20 мин</span>
+          <span class="chip">пешком от Бродвея</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">09:40</span>
+          <span class="tl-title">🕌 Хазрати Имам (Хаст Имом)</span>
+          <span class="tl-badge badge-must">🔴 Must See</span>
+        </div>
+        <p class="tl-note"><strong>1–1.5 часа.</strong> Главная духовная точка Ташкента. Огромный площадной ансамбль: мечеть Тилла Шейх, медресе, библиотека со средневековым Кораном Усмана (VII в.). Бирюзовые купола, резные колонны, тихая атмосфера. <strong>Утром — лучший свет для фото.</strong></p>
+        <div class="tl-chips">
+          <span class="chip">1–1.5 ч</span>
+          <span class="chip">рейтинг 4.7 ⭐</span>
+          <span class="chip">вход свободный</span>
+          <span class="chip">~10 мин такси</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item low">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">11:15</span>
+          <span class="tl-title">🗿 Площадь Амира Темура</span>
+          <span class="tl-badge badge-fly">⏩ Мимолётно</span>
+        </div>
+        <p class="tl-note">20–25 мин. Фото с конной статуей Тамерлана, красивый парк, советская архитектура вокруг. Не задерживаться — дальше интереснее.</p>
+        <div class="tl-chips">
+          <span class="chip">~20 мин</span>
+          <span class="chip">~15 мин такси</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item low">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">11:45</span>
+          <span class="tl-title">🚶 Бродвей (ул. Сайилгох)</span>
+          <span class="tl-badge badge-fly">⏩ Мимолётно</span>
+        </div>
+        <p class="tl-note">30 мин пешеходной прогулки. Уличные художники, сувениры, кафе под открытым небом. Удобно идти пешком от площади Темура.</p>
+        <div class="tl-chips">
+          <span class="chip">~30 мин</span>
+          <span class="chip">пешком от площади</span>
+          <span class="chip">сувениры здесь</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item medium">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">13:00</span>
+          <span class="tl-title">🍚 Besh Qozon Osh Markazi — Плов</span>
+          <span class="tl-badge badge-food">🍽 Еда</span>
+        </div>
+        <p class="tl-note"><strong>1 час.</strong> Легендарный плов-центр Ташкента. Рейтинг 4.8 у 4000+ отзывов. Плов с бараниной или нутом. <strong>Обязательно днём — вечером не готовят!</strong> 2-й этаж тише.</p>
+        <div class="tl-chips">
+          <span class="chip">~1 ч</span>
+          <span class="chip">рейтинг 4.8 ⭐</span>
+          <span class="chip">~20 мин такси</span>
+          <span class="chip">недорого</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">14:10</span>
+          <span class="tl-title">📡 Ташкентская телебашня</span>
+          <span class="tl-badge badge-must">🔴 Must See</span>
+        </div>
+        <p class="tl-note"><strong>1–1.5 часа.</strong> Смотровая площадка на высоте 375 м — вид на весь Ташкент. Была 4-й по высоте в мире 7 лет. Небольшой музей башен мира. Ресторан на 8 этаже. Вход ~100 000 сум (~7$).</p>
+        <div class="tl-chips">
+          <span class="chip">1–1.5 ч</span>
+          <span class="chip">~100 000 сум</span>
+          <span class="chip">до 22:00</span>
+          <span class="chip">пешком от Besh Qozon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">20:00</span>
+          <span class="tl-title">✨ Tashkent City + Танцующие фонтаны</span>
+          <span class="tl-badge badge-must">🔴 Must See</span>
+        </div>
+        <p class="tl-note"><strong>До конца вечера.</strong> Современный деловой квартал с фонтанным шоу. Фонтаны с 18:30 каждый час. <strong>В пятницу — световое шоу с музыкой (бесплатно)!</strong> Лучший финал первого дня. Погулять по набережной, кафе рядом.</p>
+        <div class="tl-chips">
+          <span class="chip">фонтаны с 18:30</span>
+          <span class="chip">🎇 пт + вс — световое шоу</span>
+          <span class="chip">бесплатно</span>
+          <span class="chip">~10 мин такси</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- DAY 2 -->
+  <div class="section-heading">
+    <span class="day-badge blue">День 2</span>
+    <h2>Суббота, 2 мая — Magic City</h2>
+  </div>
+  <p class="day-subtitle">Один большой блок развлечений без спешки. Комбо-билеты экономят деньги.</p>
+
+  <div class="callout amber">
+    <span class="callout-icon">🎫</span>
+    <div><strong>Совет по билетам:</strong> Бери комбинированные билеты на входе — Ocean + Penguin + Aya + Flying Theatre выходит дешевле. Сначала крытые активности (прохладнее), потом улица.</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">11:00</span>
+          <span class="tl-title">🎡 Magic City Park — Блок развлечений</span>
+          <span class="tl-badge badge-must">🔴 Весь день</span>
+        </div>
+        <p class="tl-note"><strong>5–6 часов (до ~17:00).</strong> Рейтинг 4.6 у 7000+ отзывов. Рекомендуемый порядок:</p>
+        <div class="tl-chips" style="margin-top: 10px;">
+          <span class="chip">🌊 Океанариум</span>
+          <span class="chip">🐧 Пингвинарий</span>
+          <span class="chip">🪞 Aya (зеркала)</span>
+          <span class="chip">✈️ Летающий театр</span>
+          <span class="chip">🎭 Музей восковых фигур</span>
+          <span class="chip">🌌 Планетарий</span>
+          <span class="chip">🎢 Аттракционы (улица)</span>
+          <span class="chip">🚤 Каналы Венеции</span>
+        </div>
+        <p class="tl-note" style="margin-top: 8px;">Вечером красивая подсветка. Еда прямо на территории.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">19:00</span>
+          <span class="tl-title">🍜 Seoul Menga — Корейский ужин</span>
+          <span class="tl-badge badge-food">🍽 Еда</span>
+        </div>
+        <p class="tl-note"><strong>1.5 часа.</strong> Корейский ресторан рейтинг 4.8. Bulgogi, bibimbap, обильные banchan (закуски постоянно пополняют). Хорошая смена после узбекской кухни. Работает до 22:00.</p>
+        <div class="tl-chips">
+          <span class="chip">рейтинг 4.8 ⭐</span>
+          <span class="chip">до 22:00</span>
+          <span class="chip">~15 мин такси</span>
+          <span class="chip">+998 50 729 80 00</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- DAY 3 -->
+  <div class="section-heading">
+    <span class="day-badge amber">День 3</span>
+    <h2>Воскресенье, 3 мая — Рынок + отъезд</h2>
+  </div>
+  <p class="day-subtitle">Спокойное утро на базаре → финальная прогулка вечером → поезд домой.</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">09:00</span>
+          <span class="tl-title">🛍 Рынок Чорсу</span>
+          <span class="tl-badge badge-must">🔴 Must See</span>
+        </div>
+        <p class="tl-note"><strong>2–3 часа.</strong> Самый большой и живописный базар Ташкента под синим куполом. Специи, сухофрукты, орехи, самса прямо из тандыра. Лучшее место для сувениров и подарков. Торговаться — нормально.</p>
+        <div class="tl-chips">
+          <span class="chip">2–3 ч</span>
+          <span class="chip">самса ~5 000 сум</span>
+          <span class="chip">сувениры здесь дешевле</span>
+          <span class="chip">метро Чорсу</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item low">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">13:00</span>
+          <span class="tl-title">🍽 Обед — по пути</span>
+          <span class="tl-badge badge-food">🍽 Еда</span>
+        </div>
+        <p class="tl-note">Лагман, шашлык или ещё плов — всё дёшево и вкусно вблизи Чорсу. Или второй поход в Besh Qozon если понравилось 😄</p>
+      </div>
+    </div>
+
+    <div class="timeline-item medium">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">16:00</span>
+          <span class="tl-title">🏨 Гостиница — сборы, отдых</span>
+          <span class="tl-badge badge-fly">⏩ Буфер</span>
+        </div>
+        <p class="tl-note">Собрать вещи, отдохнуть перед дорогой. Заложи время — не впритык к поезду.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item priority">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">18:30</span>
+          <span class="tl-title">⛲ Tashkent City — прощальный вечер</span>
+          <span class="tl-badge badge-must">🔴 Финал</span>
+        </div>
+        <p class="tl-note"><strong>В воскресенье тоже световое шоу у фонтанов (пт + вс)!</strong> Прогулка 1–1.5 ч перед поездом. Отличный финал поездки с видом на ночной Ташкент.</p>
+        <div class="tl-chips">
+          <span class="chip">🎇 вс — световое шоу</span>
+          <span class="chip">фонтаны с 18:30</span>
+          <span class="chip">бесплатно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item low">
+      <div class="tl-card">
+        <div class="tl-header">
+          <span class="tl-time">21:00+</span>
+          <span class="tl-title">🚂 Ташкент → Алматы · Поезд</span>
+          <span class="tl-badge badge-fly">Отъезд</span>
+        </div>
+        <p class="tl-note">Вокзал Ташкент-Главный. Уточни время отправления заранее — поезда обычно вечерние/ночные. Дорога ~10–12 часов.</p>
+        <div class="tl-chips">
+          <span class="chip">Ташкент-Главный</span>
+          <span class="chip">~10–12 ч в дороге</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- TIPS -->
+  <div class="section-heading">
+    <h2>💡 Лайфхаки</h2>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-label">🍚 Плов</div>
+      <div class="tip-value">Строго до 15:00 — вечером не готовят. Только Besh Qozon, не экономь на этом.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-label">⛲ Фонтаны Tashkent City</div>
+      <div class="tip-value">Световое шоу только в пятницу и воскресенье. С 18:30 каждый час. Прийти за 10 мин.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-label">🎡 Magic City</div>
+      <div class="tip-value">Комбинированные билеты — на 30–40% дешевле. Брать на входе у главной кассы.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-label">🚕 Транспорт</div>
+      <div class="tip-value">Yandex Go работает отлично. 1 мая — праздник, утром возможен сёрдж. Весь день ~15–25$.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-label">💰 Деньги</div>
+      <div class="tip-value">Карты принимают везде в центре. Сум снять в банкомате — лучше курс. 1$ ≈ 12 800 сум.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-label">🛍 Сувениры</div>
+      <div class="tip-value">Рынок Чорсу дешевле Бродвея. Специи, сухофрукты, платки — лучшие подарки.</div>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top: 24px;">
+    <span class="callout-icon">🚂</span>
+    <div><strong>Поезд обратно:</strong> Купи билет заранее на сайте e-ticket.uzrailpass.uz или uzrailways.com. Популярный маршрут — билеты разбирают. Рекомендуется вечерний поезд 3 мая — успеешь насладиться городом до конца дня.</div>
+  </div>
+
+</div>
+</body>
+</html>
